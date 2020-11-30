@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.Mapper">
+    <select id="countNewsByDate" resultMap="byDate">
+        select id,COUNT(1),date_year from brgo6op8d3bas4g5mii0_news_date GROUP BY date_year
+    </select>
+    <select id="countNewsByAuthor" resultMap="byAuthor">
+        select id,COUNT(1),author from brgnush8d3ba5emqdk00_news_author GROUP BY author
+    </select>
+    <select id="selectNewsByName" resultMap="news">
+        select * from brgnuh98d3ba54cutpag_news where title=#{0}
+    </select>
+
+    <resultMap id="news" type="java.util.Map">
+        <result column="id" property="ID" jdbcType="VARCHAR" />
+        <result column="create_user" property="create_user" jdbcType="VARCHAR" />
+        <result column="create_time" property="create_time" jdbcType="VARCHAR"/>
+        <result column="modify_user" property="modify_user" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modify_time" jdbcType="VARCHAR" />
+        <result column="detail" property="detail" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="category" property="category" jdbcType="VARCHAR" />
+        <result column="importance" property="importance" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="byDate" type="java.util.Map">
+        <result column="id" property="ID" jdbcType="VARCHAR" />
+        <result column="date_year" property="year" jdbcType="VARCHAR" />
+        <result column="count(1)" property="num" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="byAuthor" type="java.util.Map">
+        <result column="id" property="ID" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="count(1)" property="num" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>
